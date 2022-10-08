@@ -16,3 +16,10 @@ www.gazeta.ru
 - РИА новости за 4 года - тегов нет - https://github.com/RossiyaSegodnya/ria_news_dataset 
 - Лента.ру за 2 года - есть тематические теги, не трендовые - https://www.kaggle.com/datasets/yutkin/corpus-of-russian-news-articles-from-lenta
 
+Можно по RSS! 
+
+dataset folder: 
+    -
+    -
+    -
+    -

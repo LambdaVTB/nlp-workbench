@@ -1,0 +1,6 @@
+feedparser
+pandarallel
+natasha
+slovnet
+corus
+ipymarkup
