@@ -70,7 +70,7 @@ class RSSParser:
             'source': entry['source'],
             'title': entry['title'],
             'url':  entry['link'],
-            'date': entry['published_parsed'],
+            'date': entry['published'],
             'tags': [tag['term'] for tag in entry['tags']] if 'tags' in entry else [],
             'text': entry['summary'] if 'summary' in entry else '',
         }
