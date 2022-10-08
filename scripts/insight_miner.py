@@ -19,7 +19,6 @@ logging.basicConfig(
     level=LOGGING_LEVELS["info"],
 )
 
-
 def get_html(url: str) -> str:
     """
     Get html text from url
@@ -59,9 +58,6 @@ def get_vc_insights(trend: str) -> list[dict]:
                 }
             )
     return insights
-
-
-get_vc_insights("nft")[:2]
 
 # habr
 def get_habr_insights(trend: str) -> list[dict]:
