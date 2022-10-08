@@ -72,7 +72,7 @@ class RSSParser:
             'url':  entry['link'],
             'date': entry['published'],
             'tags': [tag['term'] for tag in entry['tags']] if 'tags' in entry else [],
-            # 'text': entry['summary'],
+            'text': entry['summary'],
         }
 
     def get_last_standardized_news(self) -> list[dict]:
