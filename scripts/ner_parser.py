@@ -2,11 +2,8 @@ from navec import Navec
 from slovnet import NER
 from natasha import (
     Segmenter,
-
     NewsEmbedding,
     NewsMorphTagger,
-
-
     Doc
 )
 

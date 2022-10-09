@@ -4,3 +4,6 @@ natasha
 slovnet
 corus
 ipymarkup
+pymorphy2
+BeautifulSoup
+scipy

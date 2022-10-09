@@ -1,4 +1,3 @@
-from turtle import distance
 from scipy import spatial
 from sent2vec.vectorizer import Vectorizer
 
