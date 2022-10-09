@@ -1,13 +1,23 @@
-# coding: utf-8
-
 from navec import Navec
 from slovnet import NER
+from natasha import (
+    Segmenter,
+
+    NewsEmbedding,
+    NewsMorphTagger,
+
+
+    Doc
+)
 
 class NERParser:
     def __init__(self, navec_weights: str, ner_weights: str) -> None:
         self.navec = Navec.load(navec_weights)
         self.ner = NER.load(ner_weights)
         self.ner.navec(self.navec)
+        self.emb = NewsEmbedding()
+        self.morph_tagger = NewsMorphTagger(self.emb)
+        self.segmenter = Segmenter()
 
     def get_ners_dict(self, text: str) -> dict:
         """ Returns a dictionary of named entities in a text
@@ -19,6 +29,8 @@ class NERParser:
                 dict: dictionary of named entities in a text
             """
             # Use this function with pandarallel's parallel_apply
+        if not text:
+            return {'ORGs': [], 'PERs': [], 'LOCs': [], 'NOUs': []}
         markup = self.ner(text)
         ORGS, PERS, LOCS = [], [], []
         for span in markup.spans:
@@ -27,9 +39,18 @@ class NERParser:
                 'ORG': ORGS,
                 'PER': PERS,
                 'LOC': LOCS,
+
             }[span.type].append(span_text)
             # print(span.type, span_text)
-        return {'ORGs': ORGS, 'PERs': PERS, 'LOCs': LOCS}
+        # Получить существительные из текста
+        doc = Doc(text)
+        doc.segment(self.segmenter)
+        doc.tag_morph(self.morph_tagger)
+        nouns = [_.text for _ in doc.tokens if _.pos == 'NOUN']
+        # print(nouns)
+        return {'ORGs': ORGS if ORGS else [], 'PERs': PERS if PERS else [], 'LOCs': LOCS if LOCS else [], 'NOUs': nouns}
+
+
 
 
 if __name__ == '__main__':
@@ -43,4 +64,5 @@ if __name__ == '__main__':
     )
     markup = ner.ner(text)
     print(show_markup(markup.text, markup.spans))
+
 
